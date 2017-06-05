@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="springEmail-main:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="spring-email-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="springEmail-main:war exploded" />
+    </root>
+  </artifact>
+</component>
