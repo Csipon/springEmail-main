@@ -9,11 +9,20 @@ public class Order {
 
     private Double price;
     private LocalDate dateReservation;
+    private String description;
 
 
     public Order(Double price, LocalDate dateReservation) {
         this.price = price;
         this.dateReservation = dateReservation;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Double getPrice() {
