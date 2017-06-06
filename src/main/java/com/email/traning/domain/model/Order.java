@@ -7,28 +7,70 @@ import java.time.LocalDate;
  */
 public class Order {
 
-    private Double price;
-    private LocalDate dateReservation;
+    private Long id;
+    private LocalDate date;
+    private LocalDate dueDate;
+    private Double totalPrice;
+    private Car car;
+    private User user;
 
+    public Order() {
 
-    public Order(Double price, LocalDate dateReservation) {
-        this.price = price;
-        this.dateReservation = dateReservation;
     }
 
-    public Double getPrice() {
-        return price;
+    public Order(LocalDate date, LocalDate dueDate, Double totalPrice, Car car, User user) {
+        this.date = date;
+        this.dueDate = dueDate;
+        this.totalPrice = totalPrice;
+        this.car = car;
+        this.user = user;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public Long getId() {
+        return id;
     }
 
-    public LocalDate getDateReservation() {
-        return dateReservation;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setDateReservation(LocalDate dateReservation) {
-        this.dateReservation = dateReservation;
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
