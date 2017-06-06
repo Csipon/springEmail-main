@@ -10,14 +10,14 @@ public class Car {
     private String mark;
     private Integer year;
     private Double pricePerHour;
-    private CarParams carParams;
+    private CarDetails carDetails;
 
-    public Car(String model, String mark, Integer year, Double pricePerHour, CarParams carParams) {
+    public Car(String model, String mark, Integer year, Double pricePerHour, CarDetails details) {
         this.model = model;
         this.mark = mark;
         this.year = year;
         this.pricePerHour = pricePerHour;
-        this.carParams = carParams;
+        this.carDetails = details;
     }
 
     public Car() {
@@ -64,11 +64,11 @@ public class Car {
         this.pricePerHour = pricePerHour;
     }
 
-    public CarParams getCarParams() {
-        return carParams;
+    public CarDetails getCarDetails() {
+        return carDetails;
     }
 
-    public void setCarParams(CarParams carParams) {
-        this.carParams = carParams;
+    public void setCarDetails(CarDetails carDetails) {
+        this.carDetails = carDetails;
     }
 }

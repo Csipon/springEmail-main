@@ -3,7 +3,7 @@ package com.email.traning.domain.model;
 /**
  * Created by Smeet on 06.06.2017.
  */
-public class CarParams {
+public class CarDetails {
 
     private Long id;
     private Integer speed;
@@ -16,7 +16,7 @@ public class CarParams {
     private Character turbo;
     private Integer acceleration;
 
-    public CarParams(Integer speed, String classCar, String power, String fuelType, Integer fuelConsume, String type, String salon, Character turbo, Integer acceleration) {
+    public CarDetails(Integer speed, String classCar, String power, String fuelType, Integer fuelConsume, String type, String salon, Character turbo, Integer acceleration) {
         this.speed = speed;
         this.classCar = classCar;
         this.power = power;
@@ -28,7 +28,7 @@ public class CarParams {
         this.acceleration = acceleration;
     }
 
-    public CarParams() {
+    public CarDetails() {
 
     }
 
