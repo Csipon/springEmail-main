@@ -19,10 +19,15 @@ public final class UserSqlQuery {
             " FROM Users WHERE id = :id";
 
     public static final String SQL_USER_BY_EMAIL = "SELECT u.id, email, password, " +
-            "first_name, last_name user_roles_id, r.role" +
+            "first_name, last_name, user_roles_id, r.role" +
             "FROM Users u " +
             "INNER JOIN User_roles r " +
             "ON u.user_roles_id = r.id " +
             "WHERE email = :email;";
+
+    public static final String SQL_USER_UPDATE = "UPDATE users "
+            + "SET first_name = :first_name, last_name = :last_name, "
+            + "email = :email, password = :password, "
+            + "user_roles_id = :user_roles_id WHERE id = :id;";
 
 }
