@@ -17,8 +17,8 @@ public class DataConfig {
 
     private static final String DRIVER = "spring.datasource.local.driver";
     private static final String USERNAME = "spring.datasource.local.username";
-    private static final String PASSWORD = "spring.datasource.password";
-    private static final String URL = "spring.datasource.jdbcUrl";
+    private static final String PASSWORD = "spring.datasource.local.password";
+    private static final String URL = "spring.datasource.local.jdbcUrl";
 
     @Resource
     private Environment env;
