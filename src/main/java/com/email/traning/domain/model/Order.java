@@ -1,4 +1,4 @@
-package com.email.traning.model;
+package com.email.traning.domain.model;
 
 import java.time.LocalDate;
 

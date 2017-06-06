@@ -71,5 +71,12 @@
             <artifactId>javax.mail</artifactId>
             <version>1.5.5</version>
         </dependency>
+
+        <!-- JDBC -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>4.3.4.RELEASE</version>
+        </dependency>
     </dependencies>
 </project>

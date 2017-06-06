@@ -1,4 +1,4 @@
-package com.email.traning.model;
+package com.email.traning.domain.model;
 
 /**
  * Created by Pasha on 05.06.2017.
