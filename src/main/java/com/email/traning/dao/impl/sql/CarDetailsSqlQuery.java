@@ -5,7 +5,7 @@ package com.email.traning.dao.impl.sql;
  */
 public final class CarDetailsSqlQuery {
 
-    public static final String PARAM_CAR_DETAILS_TABLE = "Car_details";
+    public static final String PARAM_CAR_DETAILS_TABLE = "car_details";
     public static final String PARAM_CAR_DETAILS_ID = "id";
     public static final String PARAM_CAR_DETALS_SPEED = "speed";
     public static final String PARAM_CAR_DETALS_CLASS = "class";

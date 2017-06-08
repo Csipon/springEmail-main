@@ -5,7 +5,7 @@ package com.email.traning.dao.impl.sql;
  */
 public final class OrderSqlQuery {
 
-    public static final String PARAM_ORDER_TABLE = "Orders";
+    public static final String PARAM_ORDER_TABLE = "orders";
     public static final String PARAM_ORDER_ID = "id";
     public static final String PARAM_ORDER_DATE_RESERVATION = "date";
     public static final String PARAM_ORDER_DUE_DATE = "due_date";
