@@ -68,9 +68,10 @@ public class CarDaoImpl implements CarDao {
     @Override
     public Long update(Car object) {
         if(object.getId() == null) {
-            throw new ObjectExistException("User with id " + object.getId() + " is not exist");
+            throw new ObjectExistException("Car with id " + object.getId() + " is not exist");
         }
         SqlParameterSource params = new MapSqlParameterSource()
+                .addValue(PARAM_CAR_ID, object.getId())
                 .addValue(PARAM_CAR_MODEL, object.getModel())
                 .addValue(PARAM_CAR_MARK, object.getMark())
                 .addValue(PARAM_CAR_YEAR, object.getYear())

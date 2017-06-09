@@ -26,4 +26,5 @@ public final class OrderSqlQuery {
             + "total_price = :total_price, car_id = :car_id, "
             + "user_id = :user_id WHERE id = :id;";
 
+
 }
