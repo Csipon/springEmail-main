@@ -82,8 +82,8 @@ public class CarDetailsImpl implements CarDetailsDao {
                 .addValue(PARAM_CAR_DETALS_FUEL_CONSUME, object.getFuelConsume())
                 .addValue(PARAM_CAR_DETALS_CLASS, object.getClass())
                 .addValue(PARAM_CAR_DETAILS_ACCELERATION, object.getAcceleration());
-        int aceptedRows = jdbcTemplate.update(SQL_UPDATE_CAR_DETAILS_BY_ID, params);
-        if(aceptedRows > 0) {
+        int affectedRows = jdbcTemplate.update(SQL_UPDATE_CAR_DETAILS_BY_ID, params);
+        if(affectedRows > 0) {
             return object.getId();
         }
         return null;
