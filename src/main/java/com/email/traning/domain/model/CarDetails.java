@@ -13,10 +13,10 @@ public class CarDetails {
     private Integer fuelConsume;
     private String type;
     private String salon;
-    private Character turbo;
+    private Boolean turbo;
     private Integer acceleration;
 
-    public CarDetails(Integer speed, String classCar, String power, String fuelType, Integer fuelConsume, String type, String salon, Character turbo, Integer acceleration) {
+    public CarDetails(Integer speed, String classCar, String power, String fuelType, Integer fuelConsume, String type, String salon, Boolean turbo, Integer acceleration) {
         this.speed = speed;
         this.classCar = classCar;
         this.power = power;
@@ -96,11 +96,11 @@ public class CarDetails {
         this.salon = salon;
     }
 
-    public Character getTurbo() {
+    public Boolean getTurbo() {
         return turbo;
     }
 
-    public void setTurbo(Character turbo) {
+    public void setTurbo(Boolean turbo) {
         this.turbo = turbo;
     }
 

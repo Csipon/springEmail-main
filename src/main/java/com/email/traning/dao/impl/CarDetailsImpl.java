@@ -2,6 +2,7 @@ package com.email.traning.dao.impl;
 
 import com.email.traning.dao.CarDetailsDao;
 import com.email.traning.domain.model.CarDetails;
+import com.email.traning.domain.model.User;
 import com.email.traning.exception.ObjectExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -17,6 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.email.traning.dao.impl.sql.CarDetailsSqlQuery.*;
 
@@ -92,7 +94,7 @@ public class CarDetailsImpl implements CarDetailsDao {
         SqlParameterSource params = new MapSqlParameterSource()
                 .addValue(PARAM_CAR_DETAILS_ID, id);
         List<CarDetails> carDetails = jdbcTemplate.query(SQL_SELECT_CAR_DETAILS_BY_ID, params, carDetailsExtractor);
-        return carDetails.stream().findFirst().get();
+        return carDetails.stream().findFirst().orElse(null);
     }
 
     private static class CarDetailsExtractor implements ResultSetExtractor<List<CarDetails>> {
@@ -111,7 +113,7 @@ public class CarDetailsImpl implements CarDetailsDao {
                 carDet.setType(resultSet.getString(PARAM_CAR_DETAILS_TYPE));
                 carDet.setSalon(resultSet.getString(PARAM_CAR_DETAILS_SALON));
                 carDet.setPower(resultSet.getString(PARAM_CAR_DETAILS_POWER));
-                carDet.setTurbo(resultSet.getString(PARAM_CAR_DETAILS_TURBO).charAt(0));
+                carDet.setTurbo(resultSet.getBoolean(PARAM_CAR_DETAILS_TURBO));
 
                 carDetails.add(carDet);
             }

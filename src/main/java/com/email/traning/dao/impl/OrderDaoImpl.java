@@ -64,6 +64,12 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public Long remove(Long id) {
+        SqlParameterSource params = new MapSqlParameterSource()
+                .addValue(PARAM_ORDER_ID, id);
+        int rows = jdbcTemplate.update(SQL_ORDER_DELETE, params);
+        if(rows > 0) {
+            return id;
+        }
         return null;
     }
 
@@ -92,7 +98,7 @@ public class OrderDaoImpl implements OrderDao {
         SqlParameterSource params = new MapSqlParameterSource()
                 .addValue(PARAM_ORDER_ID, id);
         List<Order> orders = jdbcTemplate.query(SQL_SELECT_ORDER_BY_ID, params, orderExtractor);
-        return orders.stream().findFirst().get();
+        return orders.stream().findFirst().orElse(null);
     }
 
     private static class OrderExtractor implements ResultSetExtractor<List<Order>> {

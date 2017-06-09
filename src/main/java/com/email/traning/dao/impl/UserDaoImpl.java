@@ -18,6 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.email.traning.dao.impl.sql.UserSqlQuery.*;
 
@@ -57,6 +58,13 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Long remove(Long id) {
+        SqlParameterSource params = new MapSqlParameterSource()
+                .addValue(PARAM_USER_ID, id);
+
+        int rows = namedJdbcTemplate.update(SQL_DELETE_USER, params);
+        if(rows > 0) {
+            return id;
+        }
         return null;
     }
 
@@ -85,13 +93,11 @@ public class UserDaoImpl implements UserDao {
         SqlParameterSource params = new MapSqlParameterSource()
                 .addValue(PARAM_USER_ID, id);
         List<User> users = namedJdbcTemplate.query(SQL_SELECT_USER_BY_ID, params, userResultSetExtractor);
-        return users.stream().findFirst().get();
+        return users.stream().findFirst().orElse(null);
     }
 
 
     private static final class UserResultSetExtractor implements ResultSetExtractor<List<User>> {
-
-
 
         @Override
         public List<User> extractData(ResultSet rs) throws SQLException, DataAccessException {

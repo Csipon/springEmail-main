@@ -2,18 +2,16 @@ DROP SCHEMA IF EXISTS public CASCADE;
 COMMIT;
 CREATE SCHEMA public;
 COMMIT;
-
-
-DROP TABLE IF EXISTS orders CASCADE;
-DROP TABLE IF EXISTS users CASCADE;
-DROP TABLE IF EXISTS user_roles CASCADE;
-DROP TABLE IF EXISTS car_details CASCADE;
-
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS user_roles;
-DROP TABLE IF EXISTS car_details;
-DROP TABLE IF EXISTS cars;
-DROP TABLE IF EXISTS orders;
+-- DROP TABLE IF EXISTS orders CASCADE;
+-- DROP TABLE IF EXISTS users CASCADE;
+-- DROP TABLE IF EXISTS user_roles CASCADE;
+-- DROP TABLE IF EXISTS car_details CASCADE;
+--
+-- DROP TABLE IF EXISTS users;
+-- DROP TABLE IF EXISTS user_roles;
+-- DROP TABLE IF EXISTS car_details;
+-- DROP TABLE IF EXISTS cars;
+-- DROP TABLE IF EXISTS orders;
 
 CREATE TABLE user_roles (
   id INTEGER not null,
@@ -38,7 +36,7 @@ CREATE TABLE cars (
   mark varchar(50) NOT NULL,
   year INTEGER NOT NULL,
   price_per_hour Float NOT NULL,
-  car_details_id INTEGER NOT NULL,
+  car_details_id INTEGER,
   CONSTRAINT cars_PK PRIMARY KEY (id)
 );
 
@@ -52,7 +50,7 @@ CREATE TABLE car_details (
   fuel_consume INTEGER NOT NULL,
   type varchar(50),
   salon varchar,
-  turbo char(1),
+  turbo boolean,
   acceleration INTEGER,
   CONSTRAINT car_details_PK PRIMARY KEY (id)
 );

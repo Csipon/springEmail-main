@@ -13,9 +13,6 @@ public final class OrderSqlQuery {
     public static final String PARAM_ORDER_CAR_ID = "car_id";
     public static final String PARAM_ORDER_USER_ID = "user_id";
 
-    public static final String SQL_ORDER_SELECT_ALL = "SELECT id, date_reservation, " +
-            "date_from, date_to, price, car_id, user_id FROM ORDERS";
-
     public static final String SQL_SELECT_ORDER_BY_ID = "SELECT id, date, due_date, " +
             "total_price, car_id, user_id " +
             "FROM orders " +
@@ -26,5 +23,6 @@ public final class OrderSqlQuery {
             + "total_price = :total_price, car_id = :car_id, "
             + "user_id = :user_id WHERE id = :id;";
 
+    public static final String SQL_ORDER_DELETE = "DELETE FROM orders WHERE id = :id;";
 
 }

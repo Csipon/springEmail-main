@@ -14,9 +14,12 @@ public final class UserSqlQuery {
 
     public static final String PARAM_USER_ROLE = "role";
 
-    public static final String SQL_SELECT_USER_BY_ID = "SELECT id, email, " +
-            "password, first_name, last_name, user_roles_id " +
-            " FROM Users WHERE id = :id";
+    public static final String SQL_SELECT_USER_BY_ID = "SELECT u.id, email, " +
+            "password, first_name, last_name, user_roles_id, r.role " +
+            " FROM users u" +
+            " INNER JOIN user_roles r ON u.user_roles_id = r.id" +
+            " WHERE u.id = :id";
+    public static final String SQL_DELETE_USER = "DELETE FROM users WHERE id = :id";
 
     public static final String SQL_USER_BY_EMAIL = "SELECT u.id, email, password, " +
             "first_name, last_name, user_roles_id, r.role" +
