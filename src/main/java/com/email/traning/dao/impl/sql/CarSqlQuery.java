@@ -21,7 +21,7 @@ public final class CarSqlQuery {
 
     public static final String SQL_UPDATE_CAR_BY_ID = "UPDATE cars " +
             "SET model = :model, mark = :mark, " +
-            "year = :year, price_per_hour = :price_per_hour " +
+            "year = :year, price_per_hour = :price_per_hour, car_details_id = :car_details_id " +
             "WHERE id = :id;";
 
     public static final String SQL_SELECT_CAR_BY_ID = "SELECT id, model, mark, " +
