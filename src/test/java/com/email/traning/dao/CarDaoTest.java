@@ -29,23 +29,24 @@ public class CarDaoTest {
         carDao.create(car);
         idCar = car.getId();
         assertNotNull("Car id is null", idCar);
-        System.out.println("car with id " + idCar + " added");
+        System.out.println("Car with id " + idCar + " added");
+
         car.setModel("Z-2");
-        carDao.update(car);
-        System.out.println("car updated");
+        assertNotNull("Car not updated", carDao.update(car));
+        System.out.println("Car updated");
     }
 
     @After
     public void removeCar() {
         assertNotNull("Car not deleted", carDao.remove(idCar));
-        System.out.println("removed");
+        System.out.println("Removed");
     }
 
     @Test
     public void checkGetCar() {
         Car car = carDao.getById(idCar);
-        assertNotNull("object from db is null", car);
-        System.out.println("method");
+        assertNotNull("Car from db is null", car);
+        System.out.println("Method");
     }
 
 }

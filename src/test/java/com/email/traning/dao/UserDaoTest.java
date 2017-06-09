@@ -25,30 +25,26 @@ public class UserDaoTest {
         User user = new User("Andrii", "Smetanko", "Andryuha@gmail.com", "123123", UserRole.ROLE_USER);
         userDao.create(user);
         idUser = user.getId();
-        assertNotNull("user id is null" ,idUser);
-        System.out.println("before");
+        assertNotNull("User id is null", idUser);
+        System.out.println("User with id " + idUser + " added");
+
+
+        user.setFirstName("Andrio");
+        assertNotNull("User not updated", userDao.update(user));
+        System.out.println("User updated");
     }
 
     @After
     public void cleanUser(){
-        assertNotNull("user with id -> " + idUser + " not deleted" , userDao.remove(idUser));
-        System.out.println("after");
+        assertNotNull("User with id -> " + idUser + " not deleted" , userDao.remove(idUser));
+        System.out.println("After");
     }
 
     @Test
     public void checkCreatedUser() {
         User user = userDao.getById(idUser);
-        assertNotNull("user object from db is null", user);
-        System.out.println("method");
-    }
-
-    @Test
-    public void checkUpdateUser() {
-        User user = userDao.getById(idUser);
-        user.setFirstName("Andrio");
-        userDao.update(user);
-        System.out.println(user.getFirstName());
-        assertNotNull("user object from db is null", user);
+        assertNotNull("User object from db is null", user);
+        System.out.println("Method");
     }
 
 }

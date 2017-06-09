@@ -40,13 +40,16 @@ public class OrderDaoTest {
         orderId = order.getId();
         assertNotNull("Order id is null", orderId);
         System.out.println("Order with id " + orderId + " added");
+
+        order.setTotalPrice(600D);
+        assertNotNull("Order not updated", orderDao.update(order));
+        System.out.println("Order updated");
     }
 
     @After
     public void removeOrder() {
         assertNotNull("Order not deleted", orderDao.remove(orderId));
         System.out.println("Removed");
-
     }
 
     @Test
