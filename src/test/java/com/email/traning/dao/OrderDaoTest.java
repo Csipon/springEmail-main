@@ -3,6 +3,7 @@ package com.email.traning.dao;
 import com.email.traning.domain.model.*;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,41 +22,56 @@ import static junit.framework.TestCase.assertNotNull;
 public class OrderDaoTest {
 
     @Autowired
-    OrderDao orderDao;
+    private OrderDao orderDao;
     @Autowired
-    CarDao carDao;
+    private CarDao carDao;
     @Autowired
-    UserDao userDao;
-    Long orderId;
+    private UserDao userDao;
+    private Long orderId;
+    private static User user;
+    private static Car car;
+
+
+    @BeforeClass
+    public static void setBeforeClass(){
+        user = new User("Andrii", "Smetanko", "Andryuha@gmail.com", "123123", UserRole.ROLE_USER);
+        CarDetails carDetails = new CarDetails(200, "C-1", "2000", "disel", 20, "Sedan", "leather", true, 5);
+        car = new Car("Z-1", "Audi", 2006, 400D, carDetails);
+    }
+
 
     @Before
     public void createOrder() {
-        User user = new User("Andrii", "Smetanko", "Andryuha@gmail.com", "123123", UserRole.ROLE_USER);
         userDao.create(user);
-        Car car = new Car("Z-1", "Audi", 2006, 400D, new CarDetails());
         carDao.create(car);
-
         Order order = new Order(LocalDate.now(), LocalDate.now(), 500D, car, user);
         orderDao.create(order);
         orderId = order.getId();
         assertNotNull("Order id is null", orderId);
         System.out.println("Order with id " + orderId + " added");
-
-        order.setTotalPrice(600D);
-        assertNotNull("Order not updated", orderDao.update(order));
-        System.out.println("Order updated");
     }
 
     @After
     public void removeOrder() {
         assertNotNull("Order not deleted", orderDao.remove(orderId));
+        carDao.remove(car.getId());
+        userDao.remove(user.getId());
         System.out.println("Removed");
     }
+
 
     @Test
     public void checkGetOrder() {
         Order order = orderDao.getById(orderId);
         assertNotNull("Object from db id null", order);
         System.out.println("Method");
+    }
+
+    @Test
+    public void update() {
+        Order order = orderDao.getById(orderId);
+        order.setTotalPrice(600D);
+        assertNotNull("Order not updated", orderDao.update(order));
+        System.out.println("Order updated");
     }
 }

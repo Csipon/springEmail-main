@@ -42,14 +42,14 @@ CREATE TABLE cars (
 
 
 CREATE TABLE car_details (
-  id bigserial NOT NULL,
+  id BIGSERIAL NOT NULL,
   speed INTEGER NOT NULL,
-  class varchar(10) NOT NULL,
-  power varchar NOT NULL,
-  fuel_type varchar(50) NOT NULL,
+  class TEXT NOT NULL,
+  power TEXT NOT NULL,
+  fuel_type TEXT NOT NULL,
   fuel_consume INTEGER NOT NULL,
-  type varchar(50),
-  salon varchar,
+  type TEXT,
+  salon TEXT,
   turbo boolean,
   acceleration INTEGER,
   CONSTRAINT car_details_PK PRIMARY KEY (id)
@@ -57,8 +57,8 @@ CREATE TABLE car_details (
 
 CREATE TABLE orders (
   id bigserial NOT NULL,
-  date DATE NOT NULL,
-  due_date DATE NOT NULL,
+  date TIMESTAMP NOT NULL,
+  due_date TIMESTAMP NOT NULL,
   total_price float NOT NULL,
   car_id INTEGER NOT NULL,
   user_id INTEGER NOT NULL,

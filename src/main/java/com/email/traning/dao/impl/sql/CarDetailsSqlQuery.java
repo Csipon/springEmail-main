@@ -22,10 +22,21 @@ public final class CarDetailsSqlQuery {
             "FROM car_details " +
             "WHERE id = :id;";
 
-    public static final String SQL_UPDATE_CAR_DETAILS_BY_ID = "UPDATE car_details " +
-            "SET speed = :speed, class = :class, " +
-            "power = :power, fuel_type = :fuel_type, fuel_consume = :fuel_consume, " +
-            "type = :type, salon = :salon, turbo = :turbo, acceleration = :acceleration, " +
+    public static final String SQL_DELETE_CAR_DETAILS = "DELETE FROM car_details WHERE id = :id;";
+
+    public static final String SQL_UPDATE_CAR_DETAILS = "" +
+            "UPDATE " +
+            " car_details " +
+            "SET " +
+            " speed = :speed, " +
+            " class = :class, " +
+            " power = :power, " +
+            " fuel_type = :fuel_type, " +
+            " fuel_consume = :fuel_consume, " +
+            " type = :type, " +
+            " salon = :salon, " +
+            " turbo = :turbo, " +
+            " acceleration = :acceleration " +
             "WHERE id = :id;";
 
 }

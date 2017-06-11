@@ -56,13 +56,19 @@ public class CarDetailsImpl implements CarDetailsDao {
                 .addValue(PARAM_CAR_DETAILS_SALON, object.getSalon())
                 .addValue(PARAM_CAR_DETAILS_SPEED, object.getSpeed())
                 .addValue(PARAM_CAR_DETAILS_TYPE, object.getType());
-        long id = jdbcInsert.executeAndReturnKey(params).longValue();
+        Long id = jdbcInsert.executeAndReturnKey(params).longValue();
         object.setId(id);
         return id;
     }
 
     @Override
     public Long remove(Long id) {
+        SqlParameterSource params = new MapSqlParameterSource()
+                .addValue(PARAM_CAR_DETAILS_ID, id);
+        int rows = jdbcTemplate.update(SQL_DELETE_CAR_DETAILS, params);
+        if(rows > 0) {
+            return id;
+        }
         return null;
     }
 
@@ -73,17 +79,17 @@ public class CarDetailsImpl implements CarDetailsDao {
         }
         SqlParameterSource params = new MapSqlParameterSource()
                 .addValue(PARAM_CAR_DETAILS_ID, object.getId())
-                .addValue(PARAM_CAR_DETAILS_TURBO, object.getType())
-                .addValue(PARAM_CAR_DETAILS_TYPE, object.getType())
                 .addValue(PARAM_CAR_DETAILS_SPEED, object.getSpeed())
-                .addValue(PARAM_CAR_DETAILS_SALON, object.getSalon())
+                .addValue(PARAM_CAR_DETAILS_CLASS, object.getClassCar())
                 .addValue(PARAM_CAR_DETAILS_POWER, object.getPower())
                 .addValue(PARAM_CAR_DETAILS_FUEL_TYPE, object.getFuelType())
                 .addValue(PARAM_CAR_DETAILS_FUEL_CONSUME, object.getFuelConsume())
-                .addValue(PARAM_CAR_DETAILS_CLASS, object.getClass())
+                .addValue(PARAM_CAR_DETAILS_TYPE, object.getType())
+                .addValue(PARAM_CAR_DETAILS_SALON, object.getSalon())
+                .addValue(PARAM_CAR_DETAILS_TURBO, object.getTurbo())
                 .addValue(PARAM_CAR_DETAILS_ACCELERATION, object.getAcceleration());
-        int affectedRows = jdbcTemplate.update(SQL_UPDATE_CAR_DETAILS_BY_ID, params);
-        if(affectedRows > 0) {
+        int rows = jdbcTemplate.update(SQL_UPDATE_CAR_DETAILS, params);
+        if(rows > 0) {
             return object.getId();
         }
         return null;

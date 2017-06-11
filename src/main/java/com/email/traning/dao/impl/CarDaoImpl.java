@@ -3,7 +3,7 @@ package com.email.traning.dao.impl;
 import com.email.traning.dao.CarDao;
 import com.email.traning.dao.CarDetailsDao;
 import com.email.traning.domain.model.Car;
-import com.email.traning.domain.model.User;
+import com.email.traning.domain.model.CarDetails;
 import com.email.traning.exception.ObjectExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -19,7 +19,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 import static com.email.traning.dao.impl.sql.CarSqlQuery.*;
 
@@ -32,12 +31,14 @@ public class CarDaoImpl implements CarDao {
     private SimpleJdbcInsert insert;
     private NamedParameterJdbcTemplate jdbcTemplate;
     private CarResultSetExtractor carResultSetExtractor;
+    private final CarDetailsDao carDetailsDao;
 
     @Autowired
     public CarDaoImpl(DataSource dataSource, CarDetailsDao carDetailsDao) {
         this.insert = new SimpleJdbcInsert(dataSource)
                 .withTableName(PARAM_CAR_TABLE)
                 .usingGeneratedKeyColumns(PARAM_CAR_ID);
+        this.carDetailsDao = carDetailsDao;
         this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
         this.carResultSetExtractor = new CarResultSetExtractor(carDetailsDao);
     }
@@ -47,15 +48,23 @@ public class CarDaoImpl implements CarDao {
         if(object.getId() != null) {
             throw new ObjectExistException("Car with id : " + object.getId() + " is exist");
         }
+        Long carDetailsId = getIdCarDetails(object.getCarDetails());
         SqlParameterSource params = new MapSqlParameterSource()
                 .addValue(PARAM_CAR_MARK, object.getMark())
                 .addValue(PARAM_CAR_MODEL, object.getModel())
                 .addValue(PARAM_CAR_PRICE_PER_HOUR, object.getPricePerHour())
                 .addValue(PARAM_CAR_YEAR, object.getYear())
-                .addValue(PARAM_CAR_DETAILS_ID, object.getCarDetails().getId());
+                .addValue(PARAM_CAR_DETAILS_ID, carDetailsId);
         Long id = insert.executeAndReturnKey(params).longValue();
         object.setId(id);
         return id;
+    }
+
+    private Long getIdCarDetails(CarDetails carDetails){
+        if (carDetails.getId() == null){
+            carDetailsDao.create(carDetails);
+        }
+        return carDetails.getId();
     }
 
     @Override
