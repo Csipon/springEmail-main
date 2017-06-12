@@ -30,8 +30,6 @@ public class OrderDaoImpl implements OrderDao {
 
     private SimpleJdbcInsert simpleJdbcInsert;
     private NamedParameterJdbcTemplate jdbcTemplate;
-    private UserDao userDao;
-    private CarDao carDao;
     private OrderExtractor orderExtractor;
 
     @Autowired
@@ -40,8 +38,6 @@ public class OrderDaoImpl implements OrderDao {
                 .withTableName(PARAM_ORDER_TABLE)
                 .usingGeneratedKeyColumns(PARAM_ORDER_ID);
         this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
-        this.userDao = userDao;
-        this.carDao = carDao;
         this.orderExtractor = new OrderExtractor(userDao, carDao);
 
     }

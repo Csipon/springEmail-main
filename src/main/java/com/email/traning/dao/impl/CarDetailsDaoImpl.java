@@ -26,14 +26,14 @@ import static com.email.traning.dao.impl.sql.CarDetailsSqlQuery.*;
  * Created by Smeet on 06.06.2017.
  */
 @Repository
-public class CarDetailsImpl implements CarDetailsDao {
+public class CarDetailsDaoImpl implements CarDetailsDao {
 
     private NamedParameterJdbcTemplate jdbcTemplate;
     private SimpleJdbcInsert jdbcInsert;
     private CarDetailsExtractor carDetailsExtractor;
 
     @Autowired
-    public CarDetailsImpl(DataSource dataSource) {
+    public CarDetailsDaoImpl(DataSource dataSource) {
         this.jdbcInsert = new SimpleJdbcInsert(dataSource)
                 .withTableName(PARAM_CAR_DETAILS_TABLE)
                 .usingGeneratedKeyColumns(PARAM_CAR_DETAILS_ID);

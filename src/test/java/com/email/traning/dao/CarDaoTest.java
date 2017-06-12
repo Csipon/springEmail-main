@@ -30,10 +30,6 @@ public class CarDaoTest {
         idCar = car.getId();
         assertNotNull("Car id is null", idCar);
         System.out.println("Car with id " + idCar + " added");
-
-        car.setModel("Z-2");
-        assertNotNull("Car not updated", carDao.update(car));
-        System.out.println("Car updated");
     }
 
     @After
@@ -48,5 +44,16 @@ public class CarDaoTest {
         assertNotNull("Car from db is null", car);
         System.out.println("Method");
     }
+
+    @Test
+    public void update() {
+        Car car = carDao.getById(idCar);
+        car.setModel("Z-2");
+        assertNotNull("Car not updated", carDao.update(car));
+        System.out.println("Car updated");
+    }
+
+
+
 
 }

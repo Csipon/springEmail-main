@@ -19,19 +19,15 @@ public class UserDaoTest {
     @Autowired
     private UserDao userDao;
     private Long idUser;
+    private User user;
 
     @Before
     public void creteUser() {
-        User user = new User("Andrii", "Smetanko", "Andryuha@gmail.com", "123123", UserRole.ROLE_USER);
+        user = new User("Andrii", "Smetanko", "Andryuha@gmail.com", "123123", UserRole.ROLE_USER);
         userDao.create(user);
         idUser = user.getId();
         assertNotNull("User id is null", idUser);
         System.out.println("User with id " + idUser + " added");
-
-
-        user.setFirstName("Andrio");
-        assertNotNull("User not updated", userDao.update(user));
-        System.out.println("User updated");
     }
 
     @After
@@ -45,6 +41,13 @@ public class UserDaoTest {
         User user = userDao.getById(idUser);
         assertNotNull("User object from db is null", user);
         System.out.println("Method");
+    }
+
+    @Test
+    public void update() {
+        user.setFirstName("Andrio");
+        assertNotNull("User not updated", userDao.update(user));
+        System.out.println("User updated");
     }
 
 }

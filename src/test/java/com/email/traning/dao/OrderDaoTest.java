@@ -3,7 +3,6 @@ package com.email.traning.dao;
 import com.email.traning.domain.model.*;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,23 +26,18 @@ public class OrderDaoTest {
     private CarDao carDao;
     @Autowired
     private UserDao userDao;
+    private User user;
+    private Car car;
     private Long orderId;
-    private static User user;
-    private static Car car;
-
-
-    @BeforeClass
-    public static void setBeforeClass(){
-        user = new User("Andrii", "Smetanko", "Andryuha@gmail.com", "123123", UserRole.ROLE_USER);
-        CarDetails carDetails = new CarDetails(200, "C-1", "2000", "disel", 20, "Sedan", "leather", true, 5);
-        car = new Car("Z-1", "Audi", 2006, 400D, carDetails);
-    }
 
 
     @Before
     public void createOrder() {
-        userDao.create(user);
+        user = new User("Andrii", "Smetanko", "Andryuha@gmail.com", "123123", UserRole.ROLE_USER);
+        CarDetails carDetails = new CarDetails(200, "C-1", "2000", "disel", 20, "Sedan", "leather", true, 5);
+        car = new Car("Z-1", "Audi", 2006, 400D, carDetails);
         carDao.create(car);
+        userDao.create(user);
         Order order = new Order(LocalDate.now(), LocalDate.now(), 500D, car, user);
         orderDao.create(order);
         orderId = order.getId();
