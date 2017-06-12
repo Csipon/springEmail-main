@@ -5,6 +5,8 @@ import com.email.traning.dao.CarDetailsDao;
 import com.email.traning.domain.model.Car;
 import com.email.traning.domain.model.CarDetails;
 import com.email.traning.exception.ObjectExistException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -32,6 +34,7 @@ public class CarDaoImpl implements CarDao {
     private NamedParameterJdbcTemplate jdbcTemplate;
     private CarResultSetExtractor carResultSetExtractor;
     private final CarDetailsDao carDetailsDao;
+    private static final Logger logger = LogManager.getLogger("dao");
 
     @Autowired
     public CarDaoImpl(DataSource dataSource, CarDetailsDao carDetailsDao) {
@@ -57,6 +60,7 @@ public class CarDaoImpl implements CarDao {
                 .addValue(PARAM_CAR_DETAILS_ID, carDetailsId);
         Long id = insert.executeAndReturnKey(params).longValue();
         object.setId(id);
+        logger.info("Car with id = " + id + " is successful created");
         return id;
     }
 
@@ -73,14 +77,17 @@ public class CarDaoImpl implements CarDao {
                 .addValue(PARAM_CAR_ID, id);
         int rows = jdbcTemplate.update(SQL_DELETE_CAR_BY_ID, params);
         if(rows > 0) {
+            logger.info("Car with id = " + id + " is successful deleted");
             return id;
         }
+        logger.error("Car with id = " + id + " is not exist");
         return null;
     }
 
     @Override
     public Long update(Car object) {
         if(object.getId() == null) {
+            logger.error("Car with id = " + object.getId() + " is not exist");
             throw new ObjectExistException("Car with id " + object.getId() + " is not exist");
         }
         SqlParameterSource params = new MapSqlParameterSource()
@@ -93,8 +100,10 @@ public class CarDaoImpl implements CarDao {
 
         int rows = jdbcTemplate.update(SQL_UPDATE_CAR_BY_ID, params);
         if(rows > 0) {
+            logger.info("Car with id = " + object.getId() + " is successful updated");
             return object.getId();
         }
+        logger.error("Car with id = " + object.getId() + " not updated");
         return null;
     }
 
@@ -103,6 +112,7 @@ public class CarDaoImpl implements CarDao {
         SqlParameterSource params = new MapSqlParameterSource()
                 .addValue(PARAM_CAR_ID, id);
         List<Car> cars = jdbcTemplate.query(SQL_SELECT_CAR_BY_ID, params, carResultSetExtractor);
+        logger.error("Car with id = " + id + " received");
         return cars.stream().findFirst().orElse(null);
     }
 

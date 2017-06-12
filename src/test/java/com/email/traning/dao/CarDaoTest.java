@@ -25,7 +25,7 @@ public class CarDaoTest {
 
     @Before
     public void createCar() {
-        Car car = new Car("Z-1", "Audi", 2006, 400D, new CarDetails());
+        Car car = new Car("Z-1", "Audi", 2006, 400D, new CarDetails(200, "C-1", "2000", "disel", 20, "type", "leather", true, 2));
         carDao.create(car);
         idCar = car.getId();
         assertNotNull("Car id is null", idCar);
