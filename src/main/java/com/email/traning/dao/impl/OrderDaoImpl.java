@@ -3,7 +3,12 @@ package com.email.traning.dao.impl;
 import com.email.traning.dao.CarDao;
 import com.email.traning.dao.OrderDao;
 import com.email.traning.dao.UserDao;
+import com.email.traning.domain.model.Car;
 import com.email.traning.domain.model.Order;
+import com.email.traning.domain.model.User;
+import com.email.traning.domain.proxy.CarProxy;
+import com.email.traning.domain.proxy.UserProxy;
+import com.email.traning.domain.real.OrderReal;
 import com.email.traning.exception.ObjectExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -112,13 +117,19 @@ public class OrderDaoImpl implements OrderDao {
         public List<Order> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
             List<Order> orders = new LinkedList<>();
             while(resultSet.next()) {
-                Order order = new Order();
+                Order order = new OrderReal();
                 order.setId(resultSet.getLong(PARAM_ORDER_ID));
                 order.setDate(resultSet.getTimestamp(PARAM_ORDER_DATE_RESERVATION).toLocalDateTime().toLocalDate());
                 order.setDueDate(resultSet.getTimestamp(PARAM_ORDER_DUE_DATE).toLocalDateTime().toLocalDate());
                 order.setTotalPrice(resultSet.getDouble(PARAM_ORDER_TOTAL_PRICE));
-                order.setCar(carDao.getById(resultSet.getLong(PARAM_ORDER_CAR_ID)));
-                order.setUser(userDao.getById(resultSet.getLong(PARAM_ORDER_USER_ID)));
+
+                Car car = new CarProxy(carDao);
+                car.setId(resultSet.getLong(PARAM_ORDER_CAR_ID));
+                order.setCar(car);
+                User user = new UserProxy(userDao);
+                user.setId(resultSet.getLong(PARAM_ORDER_USER_ID));
+                order.setUser(user);
+
                 orders.add(order);
             }
             return orders;

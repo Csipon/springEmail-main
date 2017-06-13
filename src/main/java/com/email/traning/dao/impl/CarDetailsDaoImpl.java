@@ -3,6 +3,7 @@ package com.email.traning.dao.impl;
 import com.email.traning.dao.CarDetailsDao;
 import com.email.traning.domain.model.CarDetails;
 import com.email.traning.domain.model.User;
+import com.email.traning.domain.real.CarDetailsReal;
 import com.email.traning.exception.ObjectExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -109,7 +110,7 @@ public class CarDetailsDaoImpl implements CarDetailsDao {
         public List<CarDetails> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
             List<CarDetails> carDetails = new LinkedList<>();
             while(resultSet.next()) {
-                CarDetails carDet = new CarDetails();
+                CarDetails carDet = new CarDetailsReal();
                 carDet.setId(resultSet.getLong(PARAM_CAR_DETAILS_ID));
                 carDet.setSpeed(resultSet.getInt(PARAM_CAR_DETAILS_SPEED));
                 carDet.setAcceleration(resultSet.getInt(PARAM_CAR_DETAILS_ACCELERATION));

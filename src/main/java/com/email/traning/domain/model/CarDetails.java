@@ -3,112 +3,45 @@ package com.email.traning.domain.model;
 /**
  * Created by Smeet on 06.06.2017.
  */
-public class CarDetails {
+public interface CarDetails {
 
-    private Long id;
-    private Integer speed;
-    private String classCar;
-    private String power;
-    private String fuelType;
-    private Integer fuelConsume;
-    private String type;
-    private String salon;
-    private Boolean turbo;
-    private Integer acceleration;
+    Long getId();
 
-    public CarDetails(Integer speed, String classCar, String power, String fuelType, Integer fuelConsume, String type, String salon, Boolean turbo, Integer acceleration) {
-        this.speed = speed;
-        this.classCar = classCar;
-        this.power = power;
-        this.fuelType = fuelType;
-        this.fuelConsume = fuelConsume;
-        this.type = type;
-        this.salon = salon;
-        this.turbo = turbo;
-        this.acceleration = acceleration;
-    }
+    void setId(Long id);
 
-    public CarDetails() {
+    Integer getSpeed();
 
-    }
+    void setSpeed(Integer speed);
 
-    public Long getId() {
-        return id;
-    }
+    String getClassCar();
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    void setClassCar(String classCar);
 
-    public Integer getSpeed() {
-        return speed;
-    }
+    String getPower();
 
-    public void setSpeed(Integer speed) {
-        this.speed = speed;
-    }
+    void setPower(String power);
 
-    public String getClassCar() {
-        return classCar;
-    }
+    String getFuelType();
 
-    public void setClassCar(String classCar) {
-        this.classCar = classCar;
-    }
+    void setFuelType(String fuelType);
 
-    public String getPower() {
-        return power;
-    }
+    Integer getFuelConsume();
 
-    public void setPower(String power) {
-        this.power = power;
-    }
+    void setFuelConsume(Integer fuelConsume);
 
-    public String getFuelType() {
-        return fuelType;
-    }
+    String getType();
 
-    public void setFuelType(String fuelType) {
-        this.fuelType = fuelType;
-    }
+    void setType(String type);
 
-    public Integer getFuelConsume() {
-        return fuelConsume;
-    }
+    String getSalon();
 
-    public void setFuelConsume(Integer fuelConsume) {
-        this.fuelConsume = fuelConsume;
-    }
+    void setSalon(String salon);
 
-    public String getType() {
-        return type;
-    }
+    Boolean getTurbo();
 
-    public void setType(String type) {
-        this.type = type;
-    }
+    void setTurbo(Boolean turbo);
 
-    public String getSalon() {
-        return salon;
-    }
+    Integer getAcceleration();
 
-    public void setSalon(String salon) {
-        this.salon = salon;
-    }
-
-    public Boolean getTurbo() {
-        return turbo;
-    }
-
-    public void setTurbo(Boolean turbo) {
-        this.turbo = turbo;
-    }
-
-    public Integer getAcceleration() {
-        return acceleration;
-    }
-
-    public void setAcceleration(Integer acceleration) {
-        this.acceleration = acceleration;
-    }
+    void setAcceleration(Integer acceleration);
 }

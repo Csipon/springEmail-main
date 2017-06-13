@@ -4,6 +4,8 @@ import com.email.traning.dao.CarDao;
 import com.email.traning.dao.CarDetailsDao;
 import com.email.traning.domain.model.Car;
 import com.email.traning.domain.model.CarDetails;
+import com.email.traning.domain.proxy.CarDetailsProxy;
+import com.email.traning.domain.real.CarReal;
 import com.email.traning.exception.ObjectExistException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -128,13 +130,17 @@ public class CarDaoImpl implements CarDao {
         public List<Car> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
             List<Car> cars = new LinkedList<>();
             while (resultSet.next()) {
-                Car car = new Car();
+                Car car = new CarReal();
                 car.setId(resultSet.getLong(PARAM_CAR_ID));
                 car.setMark(resultSet.getString(PARAM_CAR_MARK));
                 car.setModel(resultSet.getString(PARAM_CAR_MODEL));
                 car.setYear(resultSet.getInt(PARAM_CAR_YEAR));
                 car.setPricePerHour(resultSet.getDouble(PARAM_CAR_PRICE_PER_HOUR));
-                car.setCarDetails(carDetailsDao.getById(resultSet.getLong(PARAM_CAR_DETAILS_ID)));
+
+                CarDetails carDetails = new CarDetailsProxy(carDetailsDao);
+                carDetails.setId(resultSet.getLong(PARAM_CAR_DETAILS_ID));
+                car.setCarDetails(carDetails);
+
                 cars.add(car);
             }
             return cars;

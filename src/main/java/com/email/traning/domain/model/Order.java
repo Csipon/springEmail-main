@@ -5,72 +5,29 @@ import java.time.LocalDate;
 /**
  * Created by Pasha on 05.06.2017.
  */
-public class Order {
+public interface Order {
 
-    private Long id;
-    private LocalDate date;
-    private LocalDate dueDate;
-    private Double totalPrice;
-    private Car car;
-    private User user;
+    Long getId();
 
-    public Order() {
+    void setId(Long id);
 
-    }
+    LocalDate getDate();
 
-    public Order(LocalDate date, LocalDate dueDate, Double totalPrice, Car car, User user) {
-        this.date = date;
-        this.dueDate = dueDate;
-        this.totalPrice = totalPrice;
-        this.car = car;
-        this.user = user;
-    }
+    void setDate(LocalDate date);
 
-    public Long getId() {
-        return id;
-    }
+    LocalDate getDueDate();
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    void setDueDate(LocalDate dueDate);
 
-    public LocalDate getDate() {
-        return date;
-    }
+    Double getTotalPrice();
 
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
+    void setTotalPrice(Double totalPrice);
 
-    public LocalDate getDueDate() {
-        return dueDate;
-    }
+    Car getCar();
 
-    public void setDueDate(LocalDate dueDate) {
-        this.dueDate = dueDate;
-    }
+    void setCar(Car car);
 
-    public Double getTotalPrice() {
-        return totalPrice;
-    }
+    User getUser();
 
-    public void setTotalPrice(Double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public Car getCar() {
-        return car;
-    }
-
-    public void setCar(Car car) {
-        this.car = car;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+    void setUser(User user);
 }

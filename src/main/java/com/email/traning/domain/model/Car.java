@@ -3,71 +3,29 @@ package com.email.traning.domain.model;
 /**
  * Created by Pasha on 05.06.2017.
  */
-public class Car {
+public interface Car {
 
-    private Long id;
-    private String model;
-    private String mark;
-    private Integer year;
-    private Double pricePerHour;
-    private CarDetails carDetails;
+    Long getId();
 
-    public Car(String model, String mark, Integer year, Double pricePerHour, CarDetails details) {
-        this.model = model;
-        this.mark = mark;
-        this.year = year;
-        this.pricePerHour = pricePerHour;
-        this.carDetails = details;
-    }
+    void setId(Long id);
 
-    public Car() {
+    String getModel();
 
-    }
+    void setModel(String model);
 
-    public Long getId(){
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
+    String getMark();
 
-    public String getModel() {
-        return model;
-    }
+    void setMark(String mark);
 
-    public void setModel(String model) {
-        this.model = model;
-    }
+    Integer getYear();
 
-    public String getMark() {
-        return mark;
-    }
+    void setYear(Integer year);
 
-    public void setMark(String mark) {
-        this.mark = mark;
-    }
+    Double getPricePerHour();
 
-    public Integer getYear() {
-        return year;
-    }
+    void setPricePerHour(Double pricePerHour);
 
-    public void setYear(Integer year) {
-        this.year = year;
-    }
+    CarDetails getCarDetails();
 
-    public Double getPricePerHour() {
-        return pricePerHour;
-    }
-
-    public void setPricePerHour(Double pricePerHour) {
-        this.pricePerHour = pricePerHour;
-    }
-
-    public CarDetails getCarDetails() {
-        return carDetails;
-    }
-
-    public void setCarDetails(CarDetails carDetails) {
-        this.carDetails = carDetails;
-    }
+    void setCarDetails(CarDetails carDetails);
 }

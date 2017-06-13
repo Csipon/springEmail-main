@@ -3,6 +3,7 @@ package com.email.traning.dao.impl;
 import com.email.traning.dao.UserDao;
 import com.email.traning.domain.model.User;
 import com.email.traning.domain.model.UserRole;
+import com.email.traning.domain.real.UserReal;
 import com.email.traning.exception.ObjectExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -103,7 +104,7 @@ public class UserDaoImpl implements UserDao {
         public List<User> extractData(ResultSet rs) throws SQLException, DataAccessException {
             List<User> users = new LinkedList<>();
             while (rs.next()) {
-                User user = new User();
+                User user = new UserReal();
                 user.setId(rs.getLong(PARAM_USER_ID));
                 user.setEmail(rs.getString(PARAM_USER_EMAIL));
                 user.setPassword(rs.getString(PARAM_USER_PASSWORD));

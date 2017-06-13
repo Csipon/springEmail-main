@@ -3,72 +3,29 @@ package com.email.traning.domain.model;
 /**
  * Created by Smeet on 06.06.2017.
  */
-public class User {
+public interface User {
 
-    private Long id;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String password;
-    private UserRole userRole;
+    Long getId();
 
-    public User() {
+    void setId(Long id);
 
-    }
+    String getFirstName();
 
-    public User(String firstName, String lastName, String email, String password, UserRole userRole) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.userRole = userRole;
-    }
+    void setFirstName(String firstName);
 
-    public Long getId() {
-        return id;
-    }
+    String getLastName();
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    void setLastName(String lastName);
 
-    public String getFirstName() {
-        return firstName;
-    }
+    String getEmail();
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+    void setEmail(String email);
 
-    public String getLastName() {
-        return lastName;
-    }
+    String getPassword();
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+    void setPassword(String password);
 
-    public String getEmail() {
-        return email;
-    }
+    UserRole getUserRole();
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public UserRole getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
-    }
+    void setUserRole(UserRole userRole);
 }
