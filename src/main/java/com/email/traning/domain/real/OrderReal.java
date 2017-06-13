@@ -22,8 +22,7 @@ public class OrderReal implements Order {
 
     }
 
-    public OrderReal(Long id, LocalDate date, LocalDate dueDate, Double totalPrice, Car car, User user) {
-        this.id = id;
+    public OrderReal(LocalDate date, LocalDate dueDate, Double totalPrice, Car car, User user) {
         this.date = date;
         this.dueDate = dueDate;
         this.totalPrice = totalPrice;

@@ -19,8 +19,7 @@ public class UserReal implements User {
 
     }
 
-    public UserReal(Long id, String firstName, String lastName, String email, String password, UserRole userRole) {
-        this.id = id;
+    public UserReal(String firstName, String lastName, String email, String password, UserRole userRole) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

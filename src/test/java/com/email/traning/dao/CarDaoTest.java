@@ -2,6 +2,8 @@ package com.email.traning.dao;
 
 import com.email.traning.domain.model.Car;
 import com.email.traning.domain.model.CarDetails;
+import com.email.traning.domain.real.CarDetailsReal;
+import com.email.traning.domain.real.CarReal;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +27,7 @@ public class CarDaoTest {
 
     @Before
     public void createCar() {
-        Car car = new Car("Z-1", "Audi", 2006, 400D, new CarDetails(200, "C-1", "2000", "disel", 20, "type", "leather", true, 2));
+        Car car = new CarReal("Z-1", "Audi", 2006, 400D, new CarDetailsReal(200, "C-1", "2000", "disel", 20, "type", "leather", true, 2));
         carDao.create(car);
         idCar = car.getId();
         assertNotNull("Car id is null", idCar);

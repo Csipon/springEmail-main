@@ -19,8 +19,7 @@ public class CarReal implements Car {
 
     }
 
-    public CarReal(Long id, String model, String mark, Integer year, Double pricePerHour, CarDetails carDetails) {
-        this.id = id;
+    public CarReal(String model, String mark, Integer year, Double pricePerHour, CarDetails carDetails) {
         this.model = model;
         this.mark = mark;
         this.year = year;

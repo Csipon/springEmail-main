@@ -2,6 +2,7 @@ package com.email.traning.dao;
 
 import com.email.traning.domain.model.User;
 import com.email.traning.domain.model.UserRole;
+import com.email.traning.domain.real.UserReal;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +24,7 @@ public class UserDaoTest {
 
     @Before
     public void creteUser() {
-        user = new User("Andrii", "Smetanko", "Andryuha@gmail.com", "123123", UserRole.ROLE_USER);
+        user = new UserReal("Andrii", "Smetanko", "Andryuha@gmail.com", "123123", UserRole.ROLE_USER);
         userDao.create(user);
         idUser = user.getId();
         assertNotNull("User id is null", idUser);

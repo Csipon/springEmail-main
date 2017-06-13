@@ -22,8 +22,7 @@ public class CarDetailsReal implements CarDetails {
 
     }
 
-    public CarDetailsReal(Long id, Integer speed, String classCar, String power, String fuelType, Integer fuelConsume, String type, String salon, Boolean turbo, Integer acceleration) {
-        this.id = id;
+    public CarDetailsReal(Integer speed, String classCar, String power, String fuelType, Integer fuelConsume, String type, String salon, Boolean turbo, Integer acceleration) {
         this.speed = speed;
         this.classCar = classCar;
         this.power = power;
