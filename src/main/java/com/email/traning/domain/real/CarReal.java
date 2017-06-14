@@ -2,6 +2,7 @@ package com.email.traning.domain.real;
 
 import com.email.traning.domain.model.Car;
 import com.email.traning.domain.model.CarDetails;
+import com.email.traning.domain.model.Statuses;
 
 /**
  * Created by Smeet on 13.06.2017.
@@ -14,17 +15,19 @@ public class CarReal implements Car {
     private Integer year;
     private Double pricePerHour;
     private CarDetails carDetails;
+    private Statuses statuses;
 
     public CarReal() {
 
     }
 
-    public CarReal(String model, String mark, Integer year, Double pricePerHour, CarDetails carDetails) {
+    public CarReal(String model, String mark, Integer year, Double pricePerHour, CarDetails carDetails, Statuses statuses) {
         this.model = model;
         this.mark = mark;
         this.year = year;
         this.pricePerHour = pricePerHour;
         this.carDetails = carDetails;
+        this.statuses = statuses;
     }
 
     @Override
@@ -85,5 +88,15 @@ public class CarReal implements Car {
     @Override
     public void setCarDetails(CarDetails carDetails) {
         this.carDetails = carDetails;
+    }
+
+    @Override
+    public Statuses getStatus() {
+        return statuses;
+    }
+
+    @Override
+    public void setStatus(Statuses status) {
+        this.statuses = status;
     }
 }

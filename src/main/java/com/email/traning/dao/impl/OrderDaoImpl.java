@@ -5,11 +5,13 @@ import com.email.traning.dao.OrderDao;
 import com.email.traning.dao.UserDao;
 import com.email.traning.domain.model.Car;
 import com.email.traning.domain.model.Order;
+import com.email.traning.domain.model.Statuses;
 import com.email.traning.domain.model.User;
 import com.email.traning.domain.proxy.CarProxy;
 import com.email.traning.domain.proxy.UserProxy;
 import com.email.traning.domain.real.OrderReal;
 import com.email.traning.exception.ObjectExistException;
+import javafx.scene.media.MediaPlayer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -57,7 +59,9 @@ public class OrderDaoImpl implements OrderDao {
                 .addValue(PARAM_ORDER_DUE_DATE, object.getDueDate())
                 .addValue(PARAM_ORDER_TOTAL_PRICE, object.getTotalPrice())
                 .addValue(PARAM_ORDER_CAR_ID, object.getCar().getId())
-                .addValue(PARAM_ORDER_USER_ID, object.getUser().getId());
+                .addValue(PARAM_ORDER_STATUS_ID, object.getStatus().getId())
+                .addValue(PARAM_ORDER_CUSTOMER_ID, object.getCustomer().getId())
+                .addValue(PARAM_ORDER_MANAGER_ID, object.getManager().getId());
         long id = simpleJdbcInsert.executeAndReturnKey(params).longValue();
         object.setId(id);
         return id;
@@ -85,7 +89,9 @@ public class OrderDaoImpl implements OrderDao {
                 .addValue(PARAM_ORDER_DUE_DATE, object.getDueDate())
                 .addValue(PARAM_ORDER_TOTAL_PRICE, object.getTotalPrice())
                 .addValue(PARAM_ORDER_CAR_ID, object.getCar().getId())
-                .addValue(PARAM_ORDER_USER_ID, object.getUser().getId());
+                .addValue(PARAM_ORDER_STATUS_ID, object.getStatus().getId())
+                .addValue(PARAM_ORDER_CUSTOMER_ID, object.getCustomer().getId())
+                .addValue(PARAM_ORDER_MANAGER_ID, object.getManager().getId());
         int affectedRows = jdbcTemplate.update(SQL_ORDER_UPDATE, params);
         if (affectedRows > 0){
             return object.getId();
@@ -122,13 +128,20 @@ public class OrderDaoImpl implements OrderDao {
                 order.setDate(resultSet.getTimestamp(PARAM_ORDER_DATE_RESERVATION).toLocalDateTime().toLocalDate());
                 order.setDueDate(resultSet.getTimestamp(PARAM_ORDER_DUE_DATE).toLocalDateTime().toLocalDate());
                 order.setTotalPrice(resultSet.getDouble(PARAM_ORDER_TOTAL_PRICE));
+                order.setStatus(Statuses.valueOf(resultSet.getString(PARAM_ORDER_STATUS)));
+
 
                 Car car = new CarProxy(carDao);
                 car.setId(resultSet.getLong(PARAM_ORDER_CAR_ID));
+
                 order.setCar(car);
-                User user = new UserProxy(userDao);
-                user.setId(resultSet.getLong(PARAM_ORDER_USER_ID));
-                order.setUser(user);
+                User customer = new UserProxy(userDao);
+                customer.setId(resultSet.getLong(PARAM_ORDER_CUSTOMER_ID));
+                order.setCustomer(customer);
+
+                User manager = new UserProxy(userDao);
+                manager.setId(resultSet.getLong(PARAM_ORDER_MANAGER_ID));
+                order.setManager(manager);
 
                 orders.add(order);
             }

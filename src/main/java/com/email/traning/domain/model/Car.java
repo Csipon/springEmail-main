@@ -28,4 +28,8 @@ public interface Car {
     CarDetails getCarDetails();
 
     void setCarDetails(CarDetails carDetails);
+
+    Statuses getStatus();
+
+    void setStatus(Statuses status);
 }

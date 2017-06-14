@@ -2,6 +2,7 @@ package com.email.traning.domain.real;
 
 import com.email.traning.domain.model.Car;
 import com.email.traning.domain.model.Order;
+import com.email.traning.domain.model.Statuses;
 import com.email.traning.domain.model.User;
 
 import java.time.LocalDate;
@@ -15,19 +16,23 @@ public class OrderReal implements Order {
     private LocalDate date;
     private LocalDate dueDate;
     private Double totalPrice;
+    private Statuses statuses;
     private Car car;
-    private User user;
+    private User customer;
+    private User manager;
 
     public OrderReal() {
 
     }
 
-    public OrderReal(LocalDate date, LocalDate dueDate, Double totalPrice, Car car, User user) {
+    public OrderReal(LocalDate date, LocalDate dueDate, Double totalPrice, Statuses statuses, Car car, User customer, User manager) {
         this.date = date;
         this.dueDate = dueDate;
         this.totalPrice = totalPrice;
+        this.statuses = statuses;
         this.car = car;
-        this.user = user;
+        this.customer = customer;
+        this.manager = manager;
     }
 
     @Override
@@ -81,12 +86,33 @@ public class OrderReal implements Order {
     }
 
     @Override
-    public User getUser() {
-        return user;
+    public User getManager() {
+        return manager;
     }
 
     @Override
-    public void setUser(User user) {
-        this.user = user;
+    public void setManager(User manager) {
+        this.manager = manager;
     }
+
+    @Override
+    public User getCustomer() {
+        return customer;
+    }
+
+    @Override
+    public void setCustomer(User customer) {
+        this.customer = customer;
+    }
+
+    @Override
+    public Statuses getStatus() {
+        return statuses;
+    }
+
+    @Override
+    public void setStatus(Statuses status) {
+        this.statuses = status;
+    }
+
 }

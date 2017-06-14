@@ -68,7 +68,7 @@ CREATE TABLE history (
   id BIGSERIAL NOT NULL,
   date TIMESTAMP NOT NULL,
   description TEXT,
-  orders_id INTEGER NOT NULL,
+  orders_id INTEGER,
   change_statuses_id INTEGER NOT NULL
 );
 
@@ -93,6 +93,7 @@ INSERT INTO statuses(status) VALUES ('NEW');
 INSERT INTO statuses(status) VALUES ('PROCESSING');
 INSERT INTO statuses(status) VALUES ('ACTIVE');
 INSERT INTO statuses(status) VALUES ('FINISHED');
+INSERT INTO statuses(status) VALUES ('REJECTED');
 
 
 

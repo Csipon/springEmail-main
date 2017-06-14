@@ -3,6 +3,7 @@ package com.email.traning.domain.proxy;
 import com.email.traning.dao.CarDao;
 import com.email.traning.domain.model.Car;
 import com.email.traning.domain.model.CarDetails;
+import com.email.traning.domain.model.Statuses;
 
 /**
  * Created by Smeet on 13.06.2017.
@@ -75,6 +76,16 @@ public class CarProxy implements Car{
     @Override
     public void setCarDetails(CarDetails carDetails) {
         getCar().setCarDetails(carDetails);
+    }
+
+    @Override
+    public Statuses getStatus() {
+        return getCar().getStatus();
+    }
+
+    @Override
+    public void setStatus(Statuses status) {
+        getCar().setStatus(status);
     }
 
     private Car getCar() {

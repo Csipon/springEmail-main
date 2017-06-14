@@ -16,13 +16,14 @@ public final class UserSqlQuery {
 
     public static final String SQL_SELECT_USER_BY_ID = "SELECT u.id, email, " +
             "password, first_name, last_name, user_roles_id, r.role " +
-            " FROM users u" +
-            " INNER JOIN user_roles r ON u.user_roles_id = r.id" +
-            " WHERE u.id = :id";
-    public static final String SQL_DELETE_USER = "DELETE FROM users WHERE id = :id";
+            "FROM users u " +
+            "INNER JOIN user_roles r " +
+            "ON u.user_roles_id = r.id " +
+            "WHERE u.id = :id;";
+    public static final String SQL_DELETE_USER = "DELETE FROM users WHERE id = :id;";
 
     public static final String SQL_USER_BY_EMAIL = "SELECT u.id, email, password, " +
-            "first_name, last_name, user_roles_id, r.role" +
+            "first_name, last_name, user_roles_id, r.role " +
             "FROM Users u " +
             "INNER JOIN user_roles r " +
             "ON u.user_roles_id = r.id " +

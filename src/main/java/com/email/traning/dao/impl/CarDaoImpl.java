@@ -4,6 +4,7 @@ import com.email.traning.dao.CarDao;
 import com.email.traning.dao.CarDetailsDao;
 import com.email.traning.domain.model.Car;
 import com.email.traning.domain.model.CarDetails;
+import com.email.traning.domain.model.Statuses;
 import com.email.traning.domain.proxy.CarDetailsProxy;
 import com.email.traning.domain.real.CarReal;
 import com.email.traning.exception.ObjectExistException;
@@ -59,7 +60,8 @@ public class CarDaoImpl implements CarDao {
                 .addValue(PARAM_CAR_MODEL, object.getModel())
                 .addValue(PARAM_CAR_PRICE_PER_HOUR, object.getPricePerHour())
                 .addValue(PARAM_CAR_YEAR, object.getYear())
-                .addValue(PARAM_CAR_DETAILS_ID, carDetailsId);
+                .addValue(PARAM_CAR_DETAILS_ID, carDetailsId)
+                .addValue(PARAM_CAR_STATUS_ID, object.getStatus().getId());
         Long id = insert.executeAndReturnKey(params).longValue();
         object.setId(id);
         logger.info("Car with id = " + id + " is successful created");
@@ -98,7 +100,8 @@ public class CarDaoImpl implements CarDao {
                 .addValue(PARAM_CAR_MARK, object.getMark())
                 .addValue(PARAM_CAR_YEAR, object.getYear())
                 .addValue(PARAM_CAR_PRICE_PER_HOUR, object.getPricePerHour())
-                .addValue(PARAM_CAR_DETAILS_ID, object.getCarDetails().getId());
+                .addValue(PARAM_CAR_DETAILS_ID, object.getCarDetails().getId())
+                .addValue(PARAM_CAR_STATUS_ID, object.getStatus().getId());
 
         int rows = jdbcTemplate.update(SQL_UPDATE_CAR_BY_ID, params);
         if(rows > 0) {
@@ -114,7 +117,7 @@ public class CarDaoImpl implements CarDao {
         SqlParameterSource params = new MapSqlParameterSource()
                 .addValue(PARAM_CAR_ID, id);
         List<Car> cars = jdbcTemplate.query(SQL_SELECT_CAR_BY_ID, params, carResultSetExtractor);
-        logger.error("Car with id = " + id + " received");
+        logger.info("Car with id = " + id + " received");
         return cars.stream().findFirst().orElse(null);
     }
 
@@ -140,6 +143,8 @@ public class CarDaoImpl implements CarDao {
                 CarDetails carDetails = new CarDetailsProxy(carDetailsDao);
                 carDetails.setId(resultSet.getLong(PARAM_CAR_DETAILS_ID));
                 car.setCarDetails(carDetails);
+
+                car.setStatus(Statuses.valueOf(resultSet.getString(PARAM_CAR_STATUS)));
 
                 cars.add(car);
             }

@@ -30,19 +30,24 @@ public class OrderDaoTest {
     private CarDao carDao;
     @Autowired
     private UserDao userDao;
-    private User user;
+    private User customer;
+    private User manager;
     private Car car;
     private Long orderId;
 
 
     @Before
     public void createOrder() {
-        user = new UserReal("Andrii", "Smetanko", "Andryuha@gmail.com", "123123", UserRole.ROLE_USER);
+        customer = new UserReal("Andrii", "Smetanko", "Andryuha@gmail.com", "123123", UserRole.ROLE_USER);
+        manager = new UserReal("AndriiManger", "Smetanko", "Andryuha@gmail.com", "123123", UserRole.ROLE_USER);
+        userDao.create(customer);
+        userDao.create(manager);
         CarDetails carDetails = new CarDetailsReal(200, "C-1", "2000", "disel", 20, "Sedan", "leather", true, 5);
-        car = new CarReal("Z-1", "Audi", 2006, 400D, carDetails);
+        car = new CarReal("Z-1", "Audi", 2006, 400D, carDetails, Statuses.ACTIVE);
         carDao.create(car);
-        userDao.create(user);
-        Order order = new OrderReal(LocalDate.now(), LocalDate.now(), 500D, car, user);
+
+
+        Order order = new OrderReal(LocalDate.now(), LocalDate.now(), 500D, Statuses.RESERVED, car, customer , manager);
         orderDao.create(order);
         orderId = order.getId();
         assertNotNull("Order id is null", orderId);
@@ -53,7 +58,7 @@ public class OrderDaoTest {
     public void removeOrder() {
         assertNotNull("Order not deleted", orderDao.remove(orderId));
         carDao.remove(car.getId());
-        userDao.remove(user.getId());
+        userDao.remove(customer.getId());
         System.out.println("Removed");
     }
 

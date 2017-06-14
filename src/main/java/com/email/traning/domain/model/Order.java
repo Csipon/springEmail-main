@@ -27,7 +27,15 @@ public interface Order {
 
     void setCar(Car car);
 
-    User getUser();
+    User getManager();
 
-    void setUser(User user);
+    void setManager(User manager);
+
+    User getCustomer();
+
+    void setCustomer(User customer);
+
+    Statuses getStatus();
+
+    void setStatus(Statuses status);
 }
